@@ -7,7 +7,8 @@ export default class RandomPlanet extends Component {
 
     swapiService = new SwapiService();
     state = {
-        planet: {}
+        planet: {},
+        loading: true
     };
     constructor() {
         super();
