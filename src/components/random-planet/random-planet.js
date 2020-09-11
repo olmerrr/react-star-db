@@ -3,23 +3,24 @@ import './random-planet.css';
 import SwapiService from "../../services/swapi-services";
 
 export default class RandomPlanet extends Component {
-    swapiService = new SwapiService()
+
+    swapiService = new SwapiService();
     state = {
         id: null,
         name: null,
         population: null,
         rotationPeriod: null,
         diameter: null
-    }
+    };
     constructor() {
         super();
         this.updatePlanet();
     }
-    updatePlanet() {
+    updatePlanet(){
         const id = Math.floor(Math.random() * 25 + 2);
         this.swapiService
             .getPlanet(id)
-            .then((planet) => {
+            .then( (planet) => {
                 this.setState({
                     id,
                     name: planet.name,
@@ -27,11 +28,10 @@ export default class RandomPlanet extends Component {
                     rotationPeriod: planet.rotation_period,
                     diameter: planet.diameter
                 })
-            });
+            })
     }
-
     render() {
-        const {id,name, population, rotationPerion, diameter} = this.state;
+        const {id, name, population, rotationPeriod, diameter} = this.state;
         return (
 
             <div className="random-planet jumbotron rounded">
@@ -54,7 +54,7 @@ export default class RandomPlanet extends Component {
                             Rotation Period
                         </span>
                         <span>
-                            {rotationPerion}
+                            {rotationPeriod}
                         </span>
                     </li>
                     <li className="list-group-item">
