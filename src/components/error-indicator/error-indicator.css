@@ -3,6 +3,9 @@
     color: coral;
     font-weight: 500;
 }
+.error-icon{
+    max-width: 40px;
+}
 .error-indicator span {
     padding: 6px;
 }
