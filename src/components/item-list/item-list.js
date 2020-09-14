@@ -19,13 +19,13 @@ componentDidMount(){
 };
 
 renderItems(arr){
-    return arr.map( ({id, name}) => {
+    return arr.map(({id, name})=>{
         return(
-                <li className="list-group-item"
-                key = {id}
-                onClick = {() => this.props.onItemSelected(id)}>
-                    {name}
-                </li>
+        <li className = 'list-group-item'
+        onCLick={()=>this.props.onItemSelected(id)}
+        key={id}>
+            {name}
+        </li>
         )
     });
 };

@@ -11,7 +11,7 @@ state = {
 onPersonSelected = (id) => {
     this.setState({
         selectedPerson: id
-    })
+    });
 };
     render() {
         return (
