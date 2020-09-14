@@ -77,8 +77,8 @@ export default class SwapiService {
             id: this._extractId(person),
             name: person.name,
             gender: person.gender,
-            birthYear: person.birthYear,
-            eyeColor: person.eyeColor
+            mass: person.mass,
+            hairColor: person.hair_color
         }
     }
 }
