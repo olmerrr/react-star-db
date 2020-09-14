@@ -4,11 +4,11 @@ import SwapiService from './../../services/swapi-services';
 import Spinner from './../spinner';
 
 export default class PersonDetails extends Component {
+
     swapiService = new SwapiService();
     state = {
-        person: null
-    }
-
+    person: null
+};
     componentWillMount(){
         this.updatePerson();
     };
