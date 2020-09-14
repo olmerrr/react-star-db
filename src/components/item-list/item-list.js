@@ -22,7 +22,7 @@ renderItems(arr){
     return arr.map(({id, name})=>{
         return(
         <li className = 'list-group-item'
-        onCLick={()=>this.props.onItemSelected(id)}
+        onClick={()=>this.props.onItemSelected(id)}
         key={id}>
             {name}
         </li>

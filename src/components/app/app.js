@@ -6,7 +6,7 @@ import PersonDetails from "../person-details";
 
 export default class App extends Component {
 state = {
-    selectedPerson: null
+    selectedPerson: 5
 };
 onPersonSelected = (id) => {
     this.setState({
@@ -30,4 +30,4 @@ onPersonSelected = (id) => {
             </div>
         )
     }
-}
+};
