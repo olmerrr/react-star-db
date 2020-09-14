@@ -7,49 +7,41 @@ export default class PersonDetails extends Component {
     swapiService = new SwapiService();
     state = {
         person: null
-    };
-    componentDidMount() {
-        this.updatePerson()
+    }
+
+    componentWillMount(){
+        this.updatePerson();
     };
     componentDidUpdate(prevProps){
         if(this.props.personId !== prevProps.personId){
-            this.updatePerson();
+            this.updatePerson()
         }
-    }
-    updatePerson() {
-        const { personId } = this.props;
-        if (!personId) {
+    };
+    updatePerson(){
+        const  {personId} = this.props;
+        if(!personId){
             return;
         }
         this.swapiService
-            .getPerson(personId)
-            .then((person) => {
-                this.setState({
-                    person
-                });
-            })
+        .getPerson(personId)
+        .then((person)=> {
+            this.setState({person})
+        });
     };
+
     render() {
-        if (!this.state.person) {
-            return <span>Select a person from a list </span>
+        if(!this.state.person){
+            return <span>Select a person from list</span>
         };
-        const { person: {
-            id,
-            name,
-            gender,
-            birthYear,
-            eyeColor
-        } } = this.state;
-
+        const {id,name,gender,birthYear,eyeColor} = this.state.person;
         return (
-
             <div className="item-details card">
-                <img src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`}
+            <img src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`}
                     alt="img"
                     className="item-image" />
 
                 <div className="card-body">
-                    <h4>{name}</h4>
+        <h4>{name}</h4>
                     <ul className="list-group list-group-flush">
                         <li className="list-group-item">
                             <span className="term">
