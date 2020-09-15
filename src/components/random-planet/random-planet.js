@@ -1,6 +1,4 @@
-import React, {
-    Component
-} from "react";
+import React, {Component} from "react";
 import './random-planet.css';
 import SwapiService from "../../services/swapi-services";
 import Spinner from "../spinner";
@@ -19,7 +17,7 @@ export default class RandomPlanet extends Component {
         console.log('Constructor')
         this.interval = setInterval(this.updatePlanet, 5000);
     }
-    componentWillUnmount(){
+    componentWillUnmount() {
         clearInterval(this.interval)
     };
 
@@ -104,8 +102,8 @@ const PlanetView = ({
         span > {
             population
         } <
-        /span> <
-        /li> <
+        /span> < /
+        li > <
         li className = "list-group-item" >
         <
         span className = "term" >
@@ -114,8 +112,8 @@ const PlanetView = ({
         span > {
             rotationPeriod
         } <
-        /span> <
-        /li> <
+        /span> < /
+        li > <
         li className = "list-group-item" >
         <
         span className = "term" >
@@ -124,9 +122,9 @@ const PlanetView = ({
         span > {
             diameter
         } <
-        /span> <
-        /li> <
-        /ul> <
-        /React.Fragment>
+        /span> < /
+        li > <
+        /ul> < /
+        React.Fragment >
     )
 };
