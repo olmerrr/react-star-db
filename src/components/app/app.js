@@ -32,11 +32,14 @@ componentDidCatch(){
                     <ItemList
                       getData={this.swapiService.getAllPlanets}
                       onItemSelected={this.onPersonSelected}
+                      renderItem={
+                        ({name,population}) => (<span>{name},{population} 
+                        <button>Add</button></span>)}
                       />
                   </div>
-                  {/* <div className="col-md-6">
-                    <PersonDetails personId={this.state.selectedPerson} />
-                  </div> */}
+                  <div className="col-md-6">
+                    <PersonDetails  />
+                  </div>
                  </div>
         
                  <div className="row mb2">
@@ -44,11 +47,17 @@ componentDidCatch(){
                     <ItemList
                       getData={this.swapiService.getAllStarships}
                       onItemSelected={this.onPersonSelected}
+                      renderItem={({name, crew, costInCredits}) =>
+                      <ul className="item-list list-group">
+                        <li className="list-group-item">Name: {name}</li>
+                        <li className="list-group-item"> Crew: {crew}</li>
+                        <li className="list-group-item">Cost In Credits: {costInCredits}<input type="checkbox"/></li>
+                      </ul>}
                       />
                   </div>
-                  {/* <div className="col-md-6">
-                    <PersonDetails personId={this.state.selectedPerson} />
-                  </div> */}
+                  <div className="col-md-6">
+                    <PersonDetails  />
+                  </div>
                  </div>
             </div>
         )
