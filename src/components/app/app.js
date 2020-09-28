@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import Header from "../header/header";
 import RandomPlanet from "../random-planet";
 import SwapiService from './../../services/swapi-services';
-import PeoplePage from './people-page/people-page';
+import PeoplePage from '../people-page/people-page';
 import ErrorIndicator from '../error-indicator';
 import PersonDetails from './../person-details/person-details';
 import ItemList from './../item-list/item-list';
