@@ -4,7 +4,7 @@ import RandomPlanet from "../random-planet";
 import SwapiService from './../../services/swapi-services';
 import PeoplePage from '../people-page/people-page';
 import ErrorIndicator from '../error-indicator';
-import ItemDetails from './../item-details';
+import ItemDetails, {Record} from './../item-details/item-details';
 import ItemList from './../item-list/item-list';
 import Row from './../row';
 export default class App extends Component {
@@ -18,7 +18,6 @@ componentDidCatch(){
         hasError: true
     })
 }
-
     render() {
         if(this.state.hasError){
             return <ErrorIndicator/>
@@ -30,16 +29,19 @@ componentDidCatch(){
                 getData = {getPerson}
                 itemId = {1}
                 getImageUrl={getPersonImage}
-
-            />
+            >
+                <Record field="gender" label="Gender"/>
+                <Record eyeColor="gender" label="Eye color"/>
+            </ItemDetails>
         );
         const starshipDetails = (
             <ItemDetails
                 getData = {getStarship}
                 itemId = {2}
                 getImageUrl={getStarshipImage}
+            >
 
-            />
+            </ItemDetails>
         );
 
         return (
