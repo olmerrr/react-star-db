@@ -1,101 +1,91 @@
-import React, {Component} from "react";
-import Header from "../header/header";
-import RandomPlanet from "../random-planet";
-import SwapiService from './../../services/swapi-services';
-import PeoplePage from '../people-page/people-page';
-import ErrorIndicator from '../error-indicator';
-import ItemDetails, {Record} from './../item-details/item-details';
-import ItemList from './../item-list/item-list';
-import Row from './../row';
+import React, { Component } from 'react';
+
+import Header from '../header';
+import RandomPlanet from '../random-planet';
+import ErrorBoundry from '../error-boundry';
+
+import Row from "../row/row";
+import ItemDetails, { Record } from "../item-details/item-details";
+import SwapiService from "../../services/swapi-services";
+
+import ItemList from '../item-list/item-list';
+
+import './app.css';
 
 export default class App extends Component {
+
     swapiService = new SwapiService();
+
     state = {
-        selectedPerson: 2,
-        hasError: false
+        showRandomPlanet: true
     };
 
-    componentDidCatch() {
-        this.setState({
-            hasError: true
-        })
-    }
+    toggleRandomPlanet = () => {
+        this.setState((state) => {
+            return {
+                showRandomPlanet: !state.showRandomPlanet
+            }
+        });
+    };
 
     render() {
-        if (this.state.hasError) {
-            return <ErrorIndicator/>
-        }
-        const {
-            getPerson,
+
+        const planet = this.state.showRandomPlanet ?
+            <RandomPlanet/> :
+            null;
+
+        const { getPerson,
             getStarship,
             getPersonImage,
-            getStarshipImage
-        } = this.swapiService;
+            getStarshipImage,
+            getAllPeople,
+            getAllPlanets } = this.swapiService;
+
         const personDetails = (
             <ItemDetails
-                getData={getPerson}
                 itemId={11}
-                getImageUrl={getPersonImage}
-            >
-                <Record field="gender" label="Gender"/>
-                <Record field="birthYear" label="Birth Year"/>
-                <Record field="eyeColor" label="Eye Color"/>
+                getData={getPerson}
+                getImageUrl={getPersonImage} >
+
+                <Record field="gender" label="Gender" />
+                <Record field="eyeColor" label="Eye Color" />
+
             </ItemDetails>
         );
+
         const starshipDetails = (
             <ItemDetails
-                getData={getStarship}
                 itemId={5}
-                getImageUrl={getStarshipImage}
-            >
-                <Record field="model" label="Model"/>
-                <Record field="length" label="Length"/>
-                <Record field="crew" label="Crew"/>
+                getData={getStarship}
+                getImageUrl={getStarshipImage}>
+
+                <Record field="model" label="Model" />
+                <Record field="length" label="Length" />
+                <Record field="costInCredits" label="Cost" />
             </ItemDetails>
         );
 
         return (
-            <div>
-                <Header/>
-                <Row
-                    left={personDetails}
-                    right={starshipDetails}
-                />
-                {/*<RandomPlanet/>*/}
-                {/*<PeoplePage/>*/}
-                {/* <div className="row mb2">
-                  <div className="col-md-6">
+            <ErrorBoundry>
+                <div className="stardb-app">
+                    <Header />
+
                     <ItemList
-                      getData={this.swapiService.getAllPlanets}
-                      onItemSelected={this.onPersonSelected}
-                      renderItem={
-                        ({name,population}) => (<span>{name},{population} 
-                        <button>Add</button></span>)}
-                      />
-                  </div>
-                  <div className="col-md-6">
-                    <PersonDetails  />
-                  </div>
-                 </div>
-        
-                 <div className="row mb2">
-                  <div className="col-md-6">
+                        getData={getAllPeople}
+                        onItemSelected={() => {}}>
+
+                        { ({name}) => <span>{name}</span> }
+                    </ItemList>
+
                     <ItemList
-                      getData={this.swapiService.getAllStarships}
-                      onItemSelected={this.onPersonSelected}
-                      renderItem={({name, crew, costInCredits}) =>
-                      <ul className="item-list list-group">
-                        <li className="list-group-item">Name: {name}</li>
-                        <li className="list-group-item"> Crew: {crew}</li>
-                        <li className="list-group-item">Cost In Credits: {costInCredits}<input type="checkbox"/></li>
-                      </ul>}
-                      />
-                  </div>
-                  <div className="col-md-6">
-                    <PersonDetails  />
-                  </div>
-                 </div>*/}
-            </div>
-        )
+                        getData={getAllPlanets}
+                        onItemSelected={() => {}}>
+
+                        { ({name}) => <span>{name}</span> }
+                    </ItemList>
+
+                </div>
+            </ErrorBoundry>
+        );
     }
-};
+}
