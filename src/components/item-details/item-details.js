@@ -5,15 +5,10 @@ import Spinner from './../spinner';
 
 
 const Record = ({item, field, label}) => {
-    return(
+    return (
         <li className="list-group-item">
-                <span className="term">
-                    {label}
-                </span>
-            <span>
-                { item[field] }
-            </span>
-
+            <span className="term">{label}</span>
+            <span>{item[field]}</span>
         </li>
     );
 };
@@ -21,14 +16,13 @@ export {
     Record
 };
 export default class PersonDetails extends Component {
-
     swapiService = new SwapiService();
     state = {
         item: null,
         image: null
     };
 
-    componentWillMount() {
+    componentDidMount() {
         this.updatePerson();
     };
 
@@ -53,15 +47,11 @@ export default class PersonDetails extends Component {
     };
 
     render() {
-
-        const { item, image } = this.state;
+        const {item, image} = this.state;
         if (!item) {
             return <span>Select a item from a list</span>;
         }
-
-        const { id, name, gender,
-            birthYear, eyeColor } = item;
-
+        const {id, name} = item;
 
         return (
             <div className="item-details card">
@@ -75,7 +65,7 @@ export default class PersonDetails extends Component {
                     <ul className="list-group list-group-flush">
                         {
                             React.Children.map(this.props.children, (child) => {
-                                return React.cloneElement(child, { item });
+                                return React.cloneElement(child, {item});
                             })
                         }
                     </ul>

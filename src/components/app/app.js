@@ -7,27 +7,34 @@ import ErrorIndicator from '../error-indicator';
 import ItemDetails, {Record} from './../item-details/item-details';
 import ItemList from './../item-list/item-list';
 import Row from './../row';
+
 export default class App extends Component {
-swapiService = new SwapiService();
+    swapiService = new SwapiService();
     state = {
-    selectedPerson: 2,
-    hasError: false
-};
-componentDidCatch(){
-    this.setState({
-        hasError: true
-    })
-}
+        selectedPerson: 2,
+        hasError: false
+    };
+
+    componentDidCatch() {
+        this.setState({
+            hasError: true
+        })
+    }
+
     render() {
-        if(this.state.hasError){
+        if (this.state.hasError) {
             return <ErrorIndicator/>
         }
-        const {getPerson, getStarship,
-            getPersonImage,getStarshipImage} = this.swapiService;
+        const {
+            getPerson,
+            getStarship,
+            getPersonImage,
+            getStarshipImage
+        } = this.swapiService;
         const personDetails = (
             <ItemDetails
-                getData = {getPerson}
-                itemId = {1}
+                getData={getPerson}
+                itemId={11}
                 getImageUrl={getPersonImage}
             >
                 <Record field="gender" label="Gender"/>
@@ -37,8 +44,8 @@ componentDidCatch(){
         );
         const starshipDetails = (
             <ItemDetails
-                getData = {getStarship}
-                itemId = {5}
+                getData={getStarship}
+                itemId={5}
                 getImageUrl={getStarshipImage}
             >
                 <Record field="model" label="Model"/>
@@ -88,7 +95,7 @@ componentDidCatch(){
                     <PersonDetails  />
                   </div>
                  </div>*/}
-           </div> 
+            </div>
         )
     }
 };
