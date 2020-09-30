@@ -31,16 +31,19 @@ componentDidCatch(){
                 getImageUrl={getPersonImage}
             >
                 <Record field="gender" label="Gender"/>
-                <Record eyeColor="gender" label="Eye color"/>
+                <Record field="birthYear" label="Birth Year"/>
+                <Record field="eyeColor" label="Eye Color"/>
             </ItemDetails>
         );
         const starshipDetails = (
             <ItemDetails
                 getData = {getStarship}
-                itemId = {2}
+                itemId = {5}
                 getImageUrl={getStarshipImage}
             >
-
+                <Record field="model" label="Model"/>
+                <Record field="length" label="Length"/>
+                <Record field="crew" label="Crew"/>
             </ItemDetails>
         );
 

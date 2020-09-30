@@ -11,8 +11,9 @@ const Record = ({item, field, label}) => {
                     {label}
                 </span>
             <span>
-                    { field }
-                </span>
+                { item[field] }
+            </span>
+
         </li>
     );
 };
@@ -52,24 +53,30 @@ export default class PersonDetails extends Component {
     };
 
     render() {
-        if (!this.state.item) {
-            return <span>Select a person from list</span>
+
+        const { item, image } = this.state;
+        if (!item) {
+            return <span>Select a item from a list</span>;
         }
-        ;
-        const {id, name, image, gender, hairColor, birthYear} = this.state.item;
+
+        const { id, name, gender,
+            birthYear, eyeColor } = item;
+
+
         return (
             <div className="item-details card">
                 <img src={image}
                      alt="img"
-                     className="item-image"/>
+                     className="item-image"
+                />
 
                 <div className="card-body">
                     <h4>{name}</h4>
                     <ul className="list-group list-group-flush">
                         {
-                            React.Children.map(this.props.children,(child, idx)=>{
-                                return <li>{idx}</li>;
-                        })
+                            React.Children.map(this.props.children, (child) => {
+                                return React.cloneElement(child, { item });
+                            })
                         }
                     </ul>
                 </div>
