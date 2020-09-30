@@ -4,8 +4,9 @@ import RandomPlanet from "../random-planet";
 import SwapiService from './../../services/swapi-services';
 import PeoplePage from '../people-page/people-page';
 import ErrorIndicator from '../error-indicator';
-import PersonDetails from './../person-details/person-details';
+import ItemDetails from './../item-details';
 import ItemList from './../item-list/item-list';
+import Row from './../row';
 export default class App extends Component {
 swapiService = new SwapiService();
     state = {
@@ -22,11 +23,34 @@ componentDidCatch(){
         if(this.state.hasError){
             return <ErrorIndicator/>
         }
+        const {getPerson, getStarship,
+            getPersonImage,getStarshipImage} = this.swapiService;
+        const personDetails = (
+            <ItemDetails
+                getData = {getPerson}
+                itemId = {1}
+                getImageUrl={getPersonImage}
+
+            />
+        );
+        const starshipDetails = (
+            <ItemDetails
+                getData = {getStarship}
+                itemId = {2}
+                getImageUrl={getStarshipImage}
+
+            />
+        );
+
         return (
             <div>
                 <Header/>
-                <RandomPlanet/>
-                <PeoplePage/>
+                <Row
+                    left={personDetails}
+                    right={starshipDetails}
+                />
+                {/*<RandomPlanet/>*/}
+                {/*<PeoplePage/>*/}
                 {/* <div className="row mb2">
                   <div className="col-md-6">
                     <ItemList
