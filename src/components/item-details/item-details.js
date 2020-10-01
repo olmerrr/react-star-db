@@ -51,7 +51,7 @@ export default class PersonDetails extends Component {
         if (!item) {
             return <span>Select a item from a list</span>;
         }
-        const {id, name} = item;
+        const {name} = item;
 
         return (
             <div className="item-details card">
