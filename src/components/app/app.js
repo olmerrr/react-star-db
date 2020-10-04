@@ -1,96 +1,52 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 import Header from '../header';
 import RandomPlanet from '../random-planet';
 import ErrorBoundry from '../error-boundry';
+import SwapiService from '../../services/swapi-service';
+import DummySwapiService from '../../services/dummy-swapi-service';
 
-import Row from "../row/row";
-import ItemDetails, {Record} from "../item-details/item-details";
-import SwapiService from "../../services/swapi-services";
+import { PeoplePage, PlanetsPage, StarshipsPage } from '../pages';
+import { SwapiServiceProvider } from '../swapi-service-context';
 
-import ItemList from '../item-list/item-list';
 import './app.css';
-import {
-    PersonList,
-    PlanetList,
-    StarshipList,
-    PersonDetails,
-    PlanetDetails,
-    StarshipDetails
-} from '../sw-components';
+
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 export default class App extends Component {
 
-    swapiService = new SwapiService();
+  state = {
+    swapiService: new SwapiService()
+  };
 
-    state = {
-        showRandomPlanet: true
-    };
+  onServiceChange = () => {
+    this.setState(({ swapiService }) => {
+      const Service = swapiService instanceof SwapiService ?
+                        DummySwapiService : SwapiService;
+      return {
+        swapiService: new Service()
+      };
+    });
+  };
 
-    toggleRandomPlanet = () => {
-        this.setState((state) => {
-            return {
-                showRandomPlanet: !state.showRandomPlanet
-            }
-        });
-    };
+  render() {
 
-    render() {
+    return (
+      <ErrorBoundry>
+        <SwapiServiceProvider value={this.state.swapiService} >
+          <Router>
+            <div className="stardb-app">
+              <Header onServiceChange={this.onServiceChange} />
+              <RandomPlanet />
 
-        const planet = this.state.showRandomPlanet ?
-            <RandomPlanet/> :
-            null;
+              <Route path="/people" component={PeoplePage} />
+              <Route path="/planets" component={PlanetsPage} />
+              <Route path="/starships" component={StarshipsPage} />
 
-        const {
-            getPerson,
-            getStarship,
-            getPersonImage,
-            getStarshipImage,
-            getAllPeople,
-            getAllPlanets
-        } = this.swapiService;
-
-        const personDetails = (
-            <ItemDetails
-                itemId={11}
-                getData={getPerson}
-                getImageUrl={getPersonImage}>
-
-                <Record field="gender" label="Gender"/>
-                <Record field="eyeColor" label="Eye Color"/>
-            </ItemDetails>
-        );
-
-        const starshipDetails = (
-            <ItemDetails
-                itemId={5}
-                getData={getStarship}
-                getImageUrl={getStarshipImage}>
-
-                <Record field="model" label="Model"/>
-                <Record field="length" label="Length"/>
-                <Record field="costInCredits" label="Cost"/>
-            </ItemDetails>
-        );
-
-        return (
-            <ErrorBoundry>
-                <div className="stardb-app">
-                    <Header/>
-                    <PersonList>
-                        {({name}) => <span>{name}</span>}
-                    </PersonList>
-                    <PlanetList>
-                        {({name}) => <span>{name}</span>}
-                    </PlanetList>
-                    <StarshipList>
-                        {({name}) => <span>{name}</span>}
-                    </StarshipList>
-                    <PersonDetails itemId = {11}/>
-                    <PlanetDetails itemId = {2}/>
-                    <StarshipDetails itemId = {5}/>
-                </div>
-            </ErrorBoundry>
-        );
-    }
+            </div>
+          </Router>
+        </SwapiServiceProvider>
+      </ErrorBoundry>
+    );
+  }
 }

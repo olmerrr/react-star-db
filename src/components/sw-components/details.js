@@ -1,7 +1,7 @@
 import React from  'react';
 import {withData} from '../hoc-helpers';
 import ItemDetails, {Record} from '../item-details/item-details';
-import SwapiService from '../../services/swapi-services';
+import SwapiService from '../../services/swapi-service';
 
 const swapiService = new SwapiService();
 const {getPerson, getPlanet, getStarship,getPersonImage, getPlanetImage, getStarshipImage } = swapiService;

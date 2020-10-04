@@ -1,20 +1,34 @@
-import React from "react";
+import React from 'react';
+
 import './header.css';
-const menu = ['People','Planets','Starships'];
-const headerMenu = menu.map((el) => {
-    return <li>{el}</li>
-})
-const Header = () => {
-    return (
-        <div className="header d-flex">
-            <a href="#">
-                <h3> Star DB</h3>
-            </a>
-            <ul className="d-flex">
-             {headerMenu}
-            </ul>
-        </div>
-    )
-}
+
+const Header = ({ onServiceChange }) => {
+  return (
+    <div className="header d-flex">
+      <h3>
+        <a href="#/">
+          StarDB
+        </a>
+      </h3>
+      <ul className="d-flex">
+        <li>
+          <a href="#/people">People</a>
+        </li>
+        <li>
+          <a href="#/planets">Planets</a>
+        </li>
+        <li>
+          <a href="#/starships">Starships</a>
+        </li>
+      </ul>
+
+      <button
+          onClick={onServiceChange}
+          className="btn btn-primary btn-sm">
+        Change Service
+      </button>
+    </div>
+  );
+};
 
 export default Header;
